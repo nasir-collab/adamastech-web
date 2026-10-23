@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { InitialIndustry } from "@/lib/data/initialData";
 import {
   GraduationCap,
@@ -9,418 +10,398 @@ import {
   Activity,
   Landmark,
   Hotel,
-  Truck,
+  Factory,
   ShieldCheck,
   CheckCircle2,
   ArrowRight,
-  MoreHorizontal,
+  Sparkles,
 } from "lucide-react";
 
 interface IndustriesSectionProps {
-  industries: InitialIndustry[];
-}
-
-function getIndustryIcon(slug: string, isActive: boolean) {
-  const size = 17;
-  const color = isActive ? "#FFFFFF" : "#64748B";
-
-  switch (slug) {
-    case "education":
-      return <GraduationCap size={size} color={color} />;
-    case "retail":
-      return <ShoppingBag size={size} color={color} />;
-    case "healthcare":
-      return <Activity size={size} color={color} />;
-    case "finance":
-      return <Landmark size={size} color={color} />;
-    case "hospitality":
-      return <Hotel size={size} color={color} />;
-    case "supply-chain":
-      return <Truck size={size} color={color} />;
-    case "public-sector":
-      return <ShieldCheck size={size} color={color} />;
-    default:
-      return <Activity size={size} color={color} />;
-  }
-}
-
-function getIndustryImage(slug: string) {
-  switch (slug) {
-    case "education":
-      return "/images/industries/education.jpg";
-    case "retail":
-      return "/images/industries/retail.jpg";
-    case "healthcare":
-      return "/images/services/service-aiml.jpg";
-    case "finance":
-      return "/images/case-studies/cash-forecasting.jpg";
-    case "hospitality":
-      return "/images/about-consulting.jpg";
-    case "supply-chain":
-      return "/images/services/service-tech-transform.jpg";
-    case "public-sector":
-      return "/images/case-studies/security-ai.jpg";
-    default:
-      return "/images/industries/education.jpg";
-  }
+  industries?: InitialIndustry[];
 }
 
 export function IndustriesSection({ industries }: IndustriesSectionProps) {
-  const [activeSlug, setActiveSlug] = useState<string>(industries[0]?.slug || "education");
-  const activeIndustry = industries.find((i) => i.slug === activeSlug) || industries[0];
+  const industryList = [
+    {
+      slug: "education",
+      name: "Education & Universities",
+      title: "Digital Campus & High-Concurrency Student ERP",
+      description:
+        "Digitizing admissions, credit calculations, examination integrity, and multi-campus governance for over 180,000 active students globally.",
+      image: "/images/industries/education.jpg",
+      icon: GraduationCap,
+      accent: "#1890D7",
+      metrics: "180k+ Active Students",
+      solutions: [
+        "Arivoo UMS Full-Lifecycle University ERP",
+        "TestGUARD Remote Biometric AI Proctoring",
+        "Open edX® Enterprise Concurrency Platform",
+      ],
+    },
+    {
+      slug: "bfsi",
+      name: "BFSI (Banking & Finance)",
+      title: "High-Velocity Treasury & Financial Automation",
+      description:
+        "Sub-second liquidity forecasting, automated cash reconciliation, SAP Treasury integration, and bank-grade data security.",
+      image: "/images/industries/bfsi.jpg",
+      icon: Landmark,
+      accent: "var(--brand-orange-primary)",
+      metrics: "+30% Cash Forecast Accuracy",
+      solutions: [
+        "SAP S/4HANA Treasury & Cash Management",
+        "Automated Multi-Entity Bank Reconciliation",
+        "Strict ISO 27001 Financial Data Governance",
+      ],
+    },
+    {
+      slug: "healthcare",
+      name: "Healthcare & Life Sciences",
+      title: "Compliant Clinical Telemetry & Patient Workflows",
+      description:
+        "Modernizing electronic health records (EHR), supply tracking, and HIPAA-compliant patient communication systems.",
+      image: "/images/industries/healthcare.jpg",
+      icon: Activity,
+      accent: "#10B981",
+      metrics: "Zero Patient Data Breaches",
+      solutions: [
+        "Sovereign Cloud & HIPAA Compliance Architecture",
+        "Computer Vision Patient Telemetry & Anomaly Alerts",
+        "Clinical Supply Chain & Pharmaceuticals ERP",
+      ],
+    },
+    {
+      slug: "manufacturing",
+      name: "Smart Manufacturing",
+      title: "Industry 4.0 IoT, Robotics & Supply Chain Visibility",
+      description:
+        "Real-time shop-floor tracking, predictive machinery maintenance, and end-to-end multi-tier logistics orchestration.",
+      image: "/images/industries/manufacturing.jpg",
+      icon: Factory,
+      accent: "#F59E0B",
+      metrics: "80% Latency Reduction in Logistics",
+      solutions: [
+        "SAP S/4HANA Supply Chain & Plant Logistics",
+        "Autonomous Robotic Inspection Telemetry",
+        "Warehouse Management & Predictive Inventory AI",
+      ],
+    },
+    {
+      slug: "retail",
+      name: "Retail & E-Commerce",
+      title: "Omnichannel Commerce & Real-Time Inventory",
+      description:
+        "Connecting online digital storefronts with automated warehouse fulfilment, POS terminals, and personalized loyalty AI engines.",
+      image: "/images/industries/retail.jpg",
+      icon: ShoppingBag,
+      accent: "#EC4899",
+      metrics: "3x Faster Checkout Scalability",
+      solutions: [
+        "Oracle NetSuite Multi-Channel Retail ERP",
+        "AI Dynamic Pricing & Cart Recovery Automation",
+        "Headless Commerce & Microservices Integration",
+      ],
+    },
+    {
+      slug: "public-sector",
+      name: "Public Sector & Government",
+      title: "Sovereign Cloud, Tax E-Invoicing & Citizen Services",
+      description:
+        "Mission-critical public infrastructure meeting strict sovereign data localization, Peppol standards, and zero-trust cybersecurity.",
+      image: "/images/events/house-of-lords-26-nov.jpg",
+      icon: ShieldCheck,
+      accent: "#8B5CF6",
+      metrics: "100% Tax & Legal Compliance",
+      solutions: [
+        "UAE E-Invoicing & Federal Tax Authority Automation",
+        "Sovereign Multi-Zone Cloud Architecture",
+        "National Examination Authentication Frameworks",
+      ],
+    },
+  ];
+
+  const [activeTab, setActiveTab] = useState(0);
+  const current = industryList[activeTab];
+  const CurrentIcon = current.icon;
 
   return (
     <section
       className="industries-section"
       id="industries"
       style={{
-        background: "#F8FAFC",
+        background: "radial-gradient(ellipse at 50% 50%, #061833 0%, #020710 100%)",
         padding: "6.5rem 0",
         position: "relative",
-        borderTop: "1px solid #E2E8F0",
-        borderBottom: "1px solid #E2E8F0",
+        borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
       }}
     >
       <div className="container">
         {/* Section Header */}
-        <div style={{ marginBottom: "2.75rem" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.45rem",
-              fontSize: "0.8125rem",
-              fontWeight: 800,
-              color: "#0066B3",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              marginBottom: "0.85rem",
-            }}
-          >
-            <span>INDUSTRIES</span>
+        <div style={{ maxWidth: "760px", marginBottom: "3.5rem" }}>
+          <div className="section-tag blue" style={{ marginBottom: "0.6rem" }}>
+            Tailored Industry Practice Groups
           </div>
-
           <h2
             style={{
-              fontSize: "clamp(2.35rem, 4.2vw, 3.4rem)",
+              fontSize: "clamp(2rem, 3.8vw, 3rem)",
               fontWeight: 800,
-              color: "#0F172A",
+              color: "#FFFFFF",
+              letterSpacing: "-0.025em",
               lineHeight: 1.15,
-              letterSpacing: "-0.03em",
-              margin: 0,
             }}
           >
-            Empowering growth in diverse industries
+            Specialized Domain Architecture
           </h2>
+          <p
+            style={{
+              color: "var(--text-light-muted)",
+              fontSize: "1.0625rem",
+              marginTop: "0.85rem",
+              lineHeight: 1.6,
+            }}
+          >
+            We don&apos;t build one-size-fits-all software. Every engineering engagement is driven by deep regulatory knowledge and industry-tailored solution blueprints.
+          </p>
         </div>
 
-        {/* Horizontal Pill Tab Bar matching user reference */}
+        {/* Industry Selector Strip */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
             gap: "0.75rem",
-            overflowX: "auto",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            paddingBottom: "2rem",
-            marginBottom: "1rem",
+            marginBottom: "2.75rem",
           }}
-          role="tablist"
         >
-          {industries.map((ind) => {
-            const isActive = ind.slug === activeSlug;
-
+          {industryList.map((ind, idx) => {
+            const Icon = ind.icon;
+            const isSelected = idx === activeTab;
             return (
               <button
-                key={ind.id}
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setActiveSlug(ind.slug)}
+                key={ind.slug}
+                onClick={() => setActiveTab(idx)}
                 style={{
-                  display: "inline-flex",
+                  background: isSelected ? "rgba(24, 144, 215, 0.2)" : "rgba(255, 255, 255, 0.04)",
+                  border: isSelected ? `1px solid ${ind.accent}` : "1px solid rgba(255, 255, 255, 0.1)",
+                  borderRadius: "14px",
+                  padding: "1rem 1.15rem",
+                  display: "flex",
                   alignItems: "center",
-                  gap: "0.6rem",
-                  padding: "0.75rem 1.4rem",
-                  fontSize: "0.9375rem",
-                  fontWeight: 600,
-                  borderRadius: "9999px",
+                  gap: "0.75rem",
                   cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  flexShrink: 0,
-                  border: isActive ? "1px solid #0066B3" : "1px solid #E2E8F0",
-                  background: isActive ? "#0066B3" : "#FFFFFF",
-                  color: isActive ? "#FFFFFF" : "#475569",
-                  boxShadow: isActive
-                    ? "0 6px 20px rgba(0, 102, 179, 0.3)"
-                    : "0 2px 8px rgba(0, 0, 0, 0.04)",
-                  transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) {
-                    e.currentTarget.style.borderColor = "#CBD5E1";
-                    e.currentTarget.style.background = "#F1F5F9";
-                    e.currentTarget.style.color = "#0F172A";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) {
-                    e.currentTarget.style.borderColor = "#E2E8F0";
-                    e.currentTarget.style.background = "#FFFFFF";
-                    e.currentTarget.style.color = "#475569";
-                  }
+                  textAlign: "left",
+                  transition: "all 0.25s ease",
+                  outline: "none",
+                  boxShadow: isSelected ? `0 8px 24px ${ind.accent}25` : "none",
                 }}
               >
-                {/* Icon Capsule */}
-                <span
+                <div
                   style={{
-                    display: "inline-flex",
+                    padding: "0.5rem",
+                    borderRadius: "10px",
+                    background: isSelected ? ind.accent : "rgba(255, 255, 255, 0.06)",
+                    display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    width: "24px",
-                    height: "24px",
-                    borderRadius: "50%",
-                    background: isActive ? "rgba(255, 255, 255, 0.2)" : "rgba(100, 116, 139, 0.1)",
+                    flexShrink: 0,
                   }}
                 >
-                  {getIndustryIcon(ind.slug, isActive)}
-                </span>
-                <span>{ind.name}</span>
+                  <Icon size={18} color="#FFFFFF" />
+                </div>
+                <div style={{ fontSize: "0.875rem", fontWeight: 700, color: isSelected ? "#FFFFFF" : "var(--text-light-med)" }}>
+                  {ind.name.split(" ")[0]}
+                </div>
               </button>
             );
           })}
         </div>
 
-        {/* 2-Column Content Showcase matching user reference */}
-        {activeIndustry && (
+        {/* Image-Visualized Industry Stage */}
+        <div
+          className="glass-card"
+          style={{
+            background: "linear-gradient(135deg, rgba(8, 22, 45, 0.9) 0%, rgba(3, 10, 22, 0.95) 100%)",
+            border: `1px solid ${current.accent}44`,
+            borderRadius: "24px",
+            overflow: "hidden",
+            display: "grid",
+            gridTemplateColumns: "1.1fr 1fr",
+            gap: "0",
+            boxShadow: "0 25px 60px rgba(0, 0, 0, 0.6)",
+          }}
+        >
+          {/* Left Column: Solution Detail & Deliverables */}
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
-              gap: "2.25rem",
-              alignItems: "stretch",
+              padding: "clamp(2rem, 4vw, 3.5rem)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
             }}
           >
-            {/* Left Card: Photographic Visual Frame */}
-            <div
-              style={{
-                background: "#FFFFFF",
-                borderRadius: "24px",
-                border: "1px solid #E2E8F0",
-                boxShadow: "0 12px 35px rgba(0, 0, 0, 0.06)",
-                padding: "1.25rem",
-                display: "flex",
-                flexDirection: "column",
-                overflow: "hidden",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = "0 20px 45px rgba(0, 0, 0, 0.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 12px 35px rgba(0, 0, 0, 0.06)";
-              }}
-            >
+            <div>
               <div
                 style={{
-                  position: "relative",
-                  width: "100%",
-                  height: "100%",
-                  minHeight: "360px",
-                  borderRadius: "18px",
-                  overflow: "hidden",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  padding: "0.35rem 0.85rem",
+                  borderRadius: "var(--radius-full)",
+                  background: `${current.accent}18`,
+                  border: `1px solid ${current.accent}44`,
+                  color: current.accent,
+                  fontSize: "0.8125rem",
+                  fontWeight: 700,
+                  marginBottom: "1.25rem",
                 }}
               >
-                <img
-                  src={getIndustryImage(activeIndustry.slug)}
-                  alt={`${activeIndustry.name} Industry Visual`}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                    transition: "transform 0.4s ease",
-                  }}
-                />
+                <CurrentIcon size={15} />
+                <span>{current.name} Practice</span>
+              </div>
+
+              <h3
+                style={{
+                  fontSize: "clamp(1.65rem, 2.5vw, 2.25rem)",
+                  fontWeight: 800,
+                  color: "#FFFFFF",
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1.2,
+                  marginBottom: "0.75rem",
+                }}
+              >
+                {current.title}
+              </h3>
+
+              <p
+                style={{
+                  color: "var(--text-light-med)",
+                  fontSize: "1rem",
+                  lineHeight: 1.65,
+                  marginBottom: "1.75rem",
+                }}
+              >
+                {current.description}
+              </p>
+
+              {/* Verified Solutions in this Industry */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.75rem",
+                  marginBottom: "2.25rem",
+                  padding: "1.25rem",
+                  borderRadius: "14px",
+                  background: "rgba(0, 0, 0, 0.25)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                }}
+              >
+                <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--text-light-muted)", fontWeight: 700 }}>
+                  Proven Enterprise Solutions:
+                </div>
+                {current.solutions.map((sol, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "0.6rem",
+                      fontSize: "0.875rem",
+                      color: "#F1F5F9",
+                    }}
+                  >
+                    <CheckCircle2 size={16} color={current.accent} style={{ flexShrink: 0, marginTop: "0.15rem" }} />
+                    <span>{sol}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Right Card: Modern macOS / Browser Spec Window */}
+            <div>
+              <Link
+                href="/industries"
+                className="btn btn-primary"
+                style={{ padding: "0.85rem 1.8rem", fontSize: "0.9375rem" }}
+              >
+                <span>Explore {current.name.split(" ")[0]} Architecture</span>
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Column: Full Cinematic Photograph */}
+          <div
+            style={{
+              position: "relative",
+              minHeight: "420px",
+              width: "100%",
+              overflow: "hidden",
+            }}
+          >
+            <Image
+              src={current.image}
+              alt={current.name}
+              fill
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+            />
+            {/* Ambient Dark Gradient Overlays */}
             <div
               style={{
-                background: "#FFFFFF",
-                borderRadius: "24px",
-                border: "1px solid #E2E8F0",
-                boxShadow: "0 12px 35px rgba(0, 0, 0, 0.06)",
-                padding: "2rem 2.25rem",
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(90deg, rgba(8, 22, 45, 0.95) 0%, rgba(8, 22, 45, 0.25) 35%, transparent 60%), linear-gradient(180deg, transparent 60%, rgba(3, 10, 22, 0.95) 100%)",
+              }}
+            />
+
+            {/* Floating Metric Pill on Image */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: "2rem",
+                left: "2rem",
+                right: "2rem",
+                padding: "1.25rem 1.5rem",
+                borderRadius: "16px",
+                background: "rgba(4, 14, 30, 0.88)",
+                border: `1px solid ${current.accent}66`,
+                backdropFilter: "blur(14px)",
+                WebkitBackdropFilter: "blur(14px)",
                 display: "flex",
-                flexDirection: "column",
+                alignItems: "center",
+                gap: "1rem",
               }}
             >
-              {/* Window Header Bar (macOS Traffic Light Dots & Dots Menu) */}
               <div
                 style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "12px",
+                  background: `${current.accent}25`,
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: "1.5rem",
-                  paddingBottom: "0.75rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  justifyContent: "center",
+                  flexShrink: 0,
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
-                  <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#EF4444" }} />
-                  <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#F59E0B" }} />
-                  <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#10B981" }} />
-                </div>
-                <MoreHorizontal size={20} color="#94A3B8" />
+                <CurrentIcon size={22} color={current.accent} />
               </div>
-
-              {/* Title Card Box */}
-              <div
-                style={{
-                  background: "#F1F5F9",
-                  borderRadius: "14px",
-                  padding: "1.1rem 1.4rem",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.85rem",
-                  marginBottom: "1.25rem",
-                  border: "1px solid rgba(0, 0, 0, 0.04)",
-                }}
-              >
-                <div
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: "9px",
-                    background: "#FFFFFF",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.06)",
-                    color: "#0066B3",
-                    flexShrink: 0,
-                  }}
-                >
-                  {getIndustryIcon(activeIndustry.slug, false)}
-                </div>
-
-                <h3
-                  style={{
-                    fontSize: "1.25rem",
-                    fontWeight: 700,
-                    color: "#0F172A",
-                    letterSpacing: "-0.015em",
-                    margin: 0,
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {activeIndustry.title}
-                </h3>
-              </div>
-
-              {/* Description Content Box */}
-              <div
-                style={{
-                  background: "#F1F5F9",
-                  borderRadius: "16px",
-                  padding: "1.6rem 1.75rem",
-                  marginBottom: "1.75rem",
-                  border: "1px solid rgba(0, 0, 0, 0.04)",
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: "0.96875rem",
-                    lineHeight: 1.68,
-                    color: "#334155",
-                    margin: 0,
-                    fontWeight: 450,
-                  }}
-                >
-                  {activeIndustry.description}
-                </p>
-              </div>
-
-              {/* Key Solutions List */}
-              <div style={{ marginBottom: "2rem", marginTop: "auto" }}>
-                <h4
-                  style={{
-                    fontSize: "0.78125rem",
-                    fontWeight: 800,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    color: "#0066B3",
-                    marginBottom: "0.85rem",
-                  }}
-                >
-                  Verified Architecture Solutions
-                </h4>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                    gap: "0.6rem 1rem",
-                  }}
-                >
-                  {activeIndustry.keySolutions.map((sol, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.5rem",
-                        fontSize: "0.875rem",
-                        color: "#1E293B",
-                        fontWeight: 500,
-                      }}
-                    >
-                      <CheckCircle2 size={16} color="#0066B3" style={{ flexShrink: 0 }} />
-                      <span>{sol}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Link Button */}
               <div>
-                <Link
-                  href={`/industries/${activeIndustry.slug}`}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    background: "#0066B3",
-                    color: "#FFFFFF",
-                    padding: "0.85rem 1.85rem",
-                    borderRadius: "9999px",
-                    fontWeight: 600,
-                    fontSize: "0.9375rem",
-                    textDecoration: "none",
-                    boxShadow: "0 4px 16px rgba(0, 102, 179, 0.3)",
-                    transition: "all 0.25s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "#005291";
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow = "0 8px 24px rgba(0, 102, 179, 0.45)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "#0066B3";
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "0 4px 16px rgba(0, 102, 179, 0.3)";
-                  }}
-                >
-                  <span>Consult on {activeIndustry.name} Infrastructure</span>
-                  <ArrowRight size={16} />
-                </Link>
+                <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--text-light-muted)", fontWeight: 700 }}>
+                  Industry Benchmark Result
+                </div>
+                <div style={{ fontSize: "1.25rem", fontWeight: 800, color: "#FFFFFF", marginTop: "0.15rem" }}>
+                  {current.metrics}
+                </div>
               </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );

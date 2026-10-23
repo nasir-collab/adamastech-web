@@ -2,6 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { getRegionFromPath } from "@/lib/regions";
 import { Hero3DMotion } from "../hero/Hero3DMotion";
 import {
   ArrowRight,
@@ -14,18 +16,51 @@ import {
 } from "lucide-react";
 
 export function HeroSection() {
+  const pathname = usePathname();
+  const currentRegion = getRegionFromPath(pathname);
+
+  // Region-tailored outcome-led content
+  const regionContent: Record<string, { eyebrow: string; headlineLead: string; headlineAccent: string; valueProp: string }> = {
+    ae: {
+      eyebrow: "Middle East & GCC Regional Hub · Dubai Office",
+      headlineLead: "Powering Enterprise Excellence",
+      headlineAccent: "With Cloud, SAP & AI",
+      valueProp: "Accelerating digital sovereignty, automated e-invoicing compliance, and mission-critical cloud modernization for governments and top enterprises across the Middle East.",
+    },
+    in: {
+      eyebrow: "India Engineering Delivery Center · Kolkata & Pan-India",
+      headlineLead: "Accelerate Velocity & Scale",
+      headlineAccent: "For India's Enterprise Leaders",
+      valueProp: "Delivering senior-led SAP S/4HANA migrations, resilient AWS cloud architecture, and high-concurrency campus platforms engineered for unmatched scale.",
+    },
+    uk: {
+      eyebrow: "London Headquarters · Parliamentary Summit 26 Nov",
+      headlineLead: "Mission-Critical Cloud Resilience",
+      headlineAccent: "For UK & European Enterprises",
+      valueProp: "Senior enterprise architects decoupling legacy debt, securing sovereign data residency, and deploying audited AI architectures from our London headquarters.",
+    },
+    us: {
+      eyebrow: "Global Enterprise IT Consultancy & Digital Partner",
+      headlineLead: "Engineering Tomorrow's Enterprise",
+      headlineAccent: "Through Cloud, Core Systems & AI",
+      valueProp: "We partner with visionary enterprises to modernize legacy estates, automate complex operations, and deliver measurable business outcomes with senior-led precision.",
+    },
+  };
+
+  const activeContent = regionContent[currentRegion.code] || regionContent.us;
+
   const capabilities = [
     {
       title: "AI/ML Solutions",
       subtitle: "Intelligent Automation & GenAI",
-      href: "/services/ai-ml-solutions",
+      href: "/services/ai-data-analytics",
       icon: Sparkles,
       color: "#38BDF8",
     },
     {
       title: "AWS Services",
       subtitle: "Resilient Cloud Architecture",
-      href: "/services/aws-cloud-solutions",
+      href: "/services/aws-solutions",
       icon: Cloud,
       color: "#60A5FA",
     },
@@ -38,8 +73,8 @@ export function HeroSection() {
     },
     {
       title: "Technology Transformation",
-      subtitle: "Future-Ready Digital Modernization",
-      href: "/services",
+      subtitle: "Future-Ready Modernization",
+      href: "/services/technology-transformation",
       icon: Cpu,
       color: "#38BDF8",
     },
@@ -79,7 +114,7 @@ export function HeroSection() {
       >
         <div
           style={{
-            maxWidth: "640px",
+            maxWidth: "680px",
             textAlign: "left",
           }}
         >
@@ -95,7 +130,7 @@ export function HeroSection() {
               border: "1px solid rgba(56, 189, 248, 0.32)",
               backdropFilter: "blur(12px)",
               WebkitBackdropFilter: "blur(12px)",
-              marginBottom: "1.35rem",
+              marginBottom: "1.25rem",
               boxShadow: "0 4px 20px rgba(0, 0, 0, 0.4)",
             }}
           >
@@ -118,11 +153,11 @@ export function HeroSection() {
                 textTransform: "uppercase",
               }}
             >
-              Enterprise Digital Partner
+              {activeContent.eyebrow}
             </span>
           </div>
 
-          {/* Primary Left-Aligned Headline */}
+          {/* Outcome-Led Headline (Region Tailored) */}
           <h1
             className="hero-headline"
             style={{
@@ -130,12 +165,12 @@ export function HeroSection() {
               fontWeight: 800,
               lineHeight: 1.12,
               color: "#FFFFFF",
-              margin: "0 0 1.75rem 0",
+              margin: "0 0 1.25rem 0",
               letterSpacing: "-0.025em",
               textShadow: "0 4px 30px rgba(0, 0, 0, 0.85)",
             }}
           >
-            Seeking Digital
+            {activeContent.headlineLead}
             <span
               style={{
                 display: "block",
@@ -145,18 +180,81 @@ export function HeroSection() {
                 marginTop: "0.2rem",
               }}
             >
-              Transformation?
+              {activeContent.headlineAccent}
             </span>
           </h1>
 
-          {/* Premium Glassmorphic 4-Pillar Capability Grid */}
+          {/* 1-2 Line Value Proposition */}
+          <p
+            style={{
+              color: "var(--text-light-med)",
+              fontSize: "clamp(1rem, 1.2vw, 1.125rem)",
+              lineHeight: 1.6,
+              marginBottom: "1.75rem",
+              textShadow: "0 2px 10px rgba(0,0,0,0.5)",
+            }}
+          >
+            {activeContent.valueProp}
+          </p>
+
+          {/* Action CTAs: Primary + Secondary */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1.1rem",
+              flexWrap: "wrap",
+              marginBottom: "2rem",
+            }}
+          >
+            <Link
+              href="/contact"
+              className="btn btn-primary"
+              style={{
+                padding: "0.85rem 2rem",
+                fontSize: "0.95rem",
+                fontWeight: 600,
+                borderRadius: "var(--radius-full, 9999px)",
+                boxShadow: "0 8px 25px rgba(243, 111, 33, 0.4)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.55rem",
+              }}
+            >
+              <PhoneCall size={17} />
+              <span>Talk to an Expert</span>
+              <ArrowRight size={17} />
+            </Link>
+
+            <Link
+              href="/services"
+              className="btn btn-glass"
+              style={{
+                padding: "0.85rem 1.85rem",
+                fontSize: "0.95rem",
+                fontWeight: 600,
+                borderRadius: "var(--radius-full, 9999px)",
+                background: "rgba(6, 18, 38, 0.55)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                border: "1px solid rgba(255, 255, 255, 0.22)",
+                color: "#FFFFFF",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.55rem",
+              }}
+            >
+              <span>Explore Services</span>
+            </Link>
+          </div>
+
+          {/* Glassmorphic 4-Pillar Capability Matrix */}
           <div
             className="hero-capabilities-matrix"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
               gap: "0.85rem",
-              marginBottom: "2rem",
             }}
           >
             {capabilities.map((cap) => {
@@ -224,56 +322,6 @@ export function HeroSection() {
                 </Link>
               );
             })}
-          </div>
-
-          {/* Action CTAs */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1.1rem",
-              flexWrap: "wrap",
-            }}
-          >
-            <Link
-              href="/contact"
-              className="btn btn-primary"
-              style={{
-                padding: "0.85rem 2rem",
-                fontSize: "0.95rem",
-                fontWeight: 600,
-                borderRadius: "var(--radius-full, 9999px)",
-                boxShadow: "0 8px 25px rgba(243, 111, 33, 0.4)",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.55rem",
-              }}
-            >
-              <PhoneCall size={17} />
-              <span>Let&apos;s Talk</span>
-              <ArrowRight size={17} />
-            </Link>
-
-            <Link
-              href="/services"
-              className="btn btn-glass"
-              style={{
-                padding: "0.85rem 1.85rem",
-                fontSize: "0.95rem",
-                fontWeight: 600,
-                borderRadius: "var(--radius-full, 9999px)",
-                background: "rgba(6, 18, 38, 0.55)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                border: "1px solid rgba(255, 255, 255, 0.22)",
-                color: "#FFFFFF",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.55rem",
-              }}
-            >
-              <span>Explore Practice Areas</span>
-            </Link>
           </div>
         </div>
       </div>

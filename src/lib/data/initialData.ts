@@ -400,7 +400,7 @@ export const INITIAL_CASE_STUDIES: InitialCaseStudy[] = [
       { metric: "$420k+", label: "Downtime Savings" },
       { metric: "Real-time", label: "Shop Floor Ingestion" }
     ],
-    imageUrl: "https://adamastechconsulting.com/wp-content/uploads/2026/03/Card-1-case-studies.webp",
+    imageUrl: "/images/case-studies/manufacturing-analytics.jpg",
     tags: ["SAP Analytics Cloud", "IoT", "Cost Optimization", "Manufacturing"],
     isFeatured: true,
     order: 4,

@@ -5,15 +5,15 @@ import {
   getPublishedIndustries,
 } from "@/lib/db";
 import { HeroSection } from "@/components/home/HeroSection";
-import { ClientsSliderSection } from "@/components/home/ClientsSliderSection";
-import { ServicesSection } from "@/components/home/ServicesSection";
-import { CaseStudiesSection } from "@/components/home/CaseStudiesSection";
+import { TrustProofStrip } from "@/components/home/TrustProofStrip";
+import { CapabilityPillarsSection } from "@/components/home/CapabilityPillarsSection";
+import { BusinessOutcomesSection } from "@/components/home/BusinessOutcomesSection";
+import { SolutionsSpotlightSection } from "@/components/home/SolutionsSpotlightSection";
 import { IndustriesSection } from "@/components/home/IndustriesSection";
-import { ConsultingJourneySection } from "@/components/home/ConsultingJourneySection";
-import { TechExcellenceSection } from "@/components/home/TechExcellenceSection";
-import { PartnersSection } from "@/components/home/PartnersSection";
-import { GlobalPresenceSection } from "@/components/home/GlobalPresenceSection";
-import { LeadGenerationSection } from "@/components/home/LeadGenerationSection";
+import { CaseStudiesSection } from "@/components/home/CaseStudiesSection";
+import { WhyAdamasTechSection } from "@/components/home/WhyAdamasTechSection";
+import { EventsSpotlightSection } from "@/components/home/EventsSpotlightSection";
+import { FinalCtaBandSection } from "@/components/home/FinalCtaBandSection";
 
 // Incremental Static Regeneration (ISR) interval in seconds
 export const revalidate = 60;
@@ -62,16 +62,35 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
+      {/* 1. Hero: Outcome-Led & Region-Aware */}
       <HeroSection />
-      <ClientsSliderSection />
-      <ServicesSection services={services} />
-      <CaseStudiesSection caseStudies={caseStudies} />
-      <PartnersSection />
+
+      {/* 2. Trust / Proof Strip: De-Risk Early (Stats, Certifications & Clients) */}
+      <TrustProofStrip />
+
+      {/* 3. Capability Pillars: 3 Core Pillars (Cloud, Transformation, AI) */}
+      <CapabilityPillarsSection />
+
+      {/* 4. Business Outcomes: Shift Services -> Value (Problems Solved & Metrics) */}
+      <BusinessOutcomesSection />
+
+      {/* 5. Solutions / Products Spotlight: Arivoo Suite & AI IP */}
+      <SolutionsSpotlightSection />
+
+      {/* 6. Industries Strip: Instant Relevance Across Vertical Sectors */}
       <IndustriesSection industries={industries} />
-      <ConsultingJourneySection />
-      <TechExcellenceSection />
-      <GlobalPresenceSection />
-      <LeadGenerationSection />
+
+      {/* 7. Case Studies: Metric-Forward Delivery Proof */}
+      <CaseStudiesSection caseStudies={caseStudies} />
+
+      {/* 8. Why AdamasTech: RICE Adamas Backing, 4-Country Delivery, Senior-Led */}
+      <WhyAdamasTechSection />
+
+      {/* 9. Events Spotlight: House of Lords 26 Nov Executive Summit */}
+      <EventsSpotlightSection />
+
+      {/* 10. Final CTA Band: Low-Friction Enquiry Routing & Expert Scoping */}
+      <FinalCtaBandSection />
     </>
   );
 }

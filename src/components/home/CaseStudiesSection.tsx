@@ -2,8 +2,9 @@
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { InitialCaseStudy } from "@/lib/data/initialData";
-import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, TrendingUp, ShieldCheck } from "lucide-react";
 
 interface CaseStudiesSectionProps {
   caseStudies: InitialCaseStudy[];
@@ -17,6 +18,7 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
   // 1. Security AI Recognition
   // 2. Parking with AI Intelligence
   // 3. Boosting Cash Forecasting by 30%
+  // 4. Reducing Production Cost in Liquor Manufacturing
   const orderedStudies = [...caseStudies].sort((a, b) => {
     const orderMap: Record<string, number> = {
       "effortless-security-ai": 1,
@@ -29,7 +31,7 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
 
   const handleScroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
-    const cardWidth = 320; // approximate card + gap
+    const cardWidth = 340;
     const currentScroll = scrollRef.current.scrollLeft;
     const targetScroll =
       direction === "left"
@@ -47,7 +49,7 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
 
   const handleScrollListener = () => {
     if (!scrollRef.current) return;
-    const cardWidth = 320;
+    const cardWidth = 340;
     const index = Math.round(scrollRef.current.scrollLeft / cardWidth);
     if (index !== activeSlide && index >= 0 && index < orderedStudies.length) {
       setActiveSlide(index);
@@ -59,15 +61,45 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
       className="case-studies-section"
       id="case-studies"
       style={{
-        background: "#FFFFFF",
+        background: "radial-gradient(ellipse at 50% 10%, #071E40 0%, #030813 70%)",
         padding: "6.5rem 0",
         position: "relative",
         overflow: "hidden",
-        borderTop: "1px solid #E2E8F0",
-        borderBottom: "1px solid #E2E8F0",
+        borderTop: "1px solid rgba(24, 144, 215, 0.2)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
       }}
     >
-      <div className="container" style={{ position: "relative" }}>
+      {/* Ambient background glow accents */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "10%",
+          left: "5%",
+          width: "500px",
+          height: "500px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(24, 144, 215, 0.1) 0%, transparent 70%)",
+          filter: "blur(60px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          bottom: "10%",
+          right: "5%",
+          width: "450px",
+          height: "450px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(243, 111, 33, 0.08) 0%, transparent 70%)",
+          filter: "blur(50px)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div className="container" style={{ position: "relative", zIndex: 2 }}>
         <div
           style={{
             display: "grid",
@@ -76,23 +108,28 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
             alignItems: "center",
           }}
         >
-          {/* Left Column: Typography & Action */}
-          <div style={{ maxWidth: "420px" }}>
+          {/* Left Column: Typography, Impact Metrics & CTA */}
+          <div style={{ maxWidth: "440px" }}>
             {/* Eyebrow */}
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.45rem",
+                gap: "0.5rem",
+                padding: "0.4rem 1.1rem",
+                borderRadius: "var(--radius-full)",
+                background: "rgba(24, 144, 215, 0.15)",
+                border: "1px solid rgba(24, 144, 215, 0.45)",
+                color: "#38BDF8",
                 fontSize: "0.8125rem",
                 fontWeight: 800,
-                color: "#0066B3",
-                letterSpacing: "0.12em",
+                letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 marginBottom: "1.25rem",
               }}
             >
-              <span>SUCCESS STORIES</span>
+              <Sparkles size={14} color="#38BDF8" />
+              <span>MEASURABLE SUCCESS STORIES</span>
             </div>
 
             {/* Headline */}
@@ -100,13 +137,13 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
               style={{
                 fontSize: "clamp(2.35rem, 4.2vw, 3.4rem)",
                 fontWeight: 800,
-                color: "#0F172A",
-                lineHeight: 1.14,
+                color: "#FFFFFF",
+                lineHeight: 1.15,
                 letterSpacing: "-0.03em",
-                marginBottom: "1.5rem",
+                marginBottom: "1.25rem",
               }}
             >
-              Results- Driven projects that deliver excellence
+              Results-Driven Projects Delivering Excellence
             </h2>
 
             {/* Description */}
@@ -114,43 +151,60 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
               style={{
                 fontSize: "1.0625rem",
                 lineHeight: 1.7,
-                color: "#475569",
-                marginBottom: "2.5rem",
-                maxWidth: "360px",
+                color: "var(--text-light-muted)",
+                marginBottom: "2rem",
               }}
             >
-              Discover the remarkable projects that highlight our innovation, expertise, and commitment to delivering excellence.
+              Real production transformations with audited operational benchmarks across global enterprises in UK, UAE, US, and India.
             </p>
+
+            {/* Key Outcomes Summary Box */}
+            <div
+              style={{
+                background: "rgba(10, 28, 54, 0.7)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: "16px",
+                padding: "1.25rem 1.5rem",
+                marginBottom: "2.25rem",
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "1.25rem",
+              }}
+            >
+              <div>
+                <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "#38BDF8", lineHeight: 1 }}>
+                  30%
+                </div>
+                <div style={{ fontSize: "0.78125rem", color: "#CBD5E1", marginTop: "0.25rem", fontWeight: 500 }}>
+                  Cash Forecast Accuracy
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "var(--brand-orange-primary)", lineHeight: 1 }}>
+                  &lt;0.8s
+                </div>
+                <div style={{ fontSize: "0.78125rem", color: "#CBD5E1", marginTop: "0.25rem", fontWeight: 500 }}>
+                  AI Verification Latency
+                </div>
+              </div>
+            </div>
 
             {/* View All Pill CTA Button */}
             <Link
               href="/case-studies"
+              className="btn btn-primary"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.55rem",
-                background: "#0066B3",
-                color: "#FFFFFF",
-                padding: "0.875rem 2rem",
+                padding: "0.875rem 2.25rem",
                 borderRadius: "9999px",
-                fontWeight: 600,
+                fontWeight: 700,
                 fontSize: "1rem",
-                textDecoration: "none",
-                boxShadow: "0 6px 20px rgba(0, 102, 179, 0.3)",
-                transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#005291";
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 10px 28px rgba(0, 102, 179, 0.45)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "#0066B3";
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 6px 20px rgba(0, 102, 179, 0.3)";
+                boxShadow: "0 6px 24px rgba(24, 144, 215, 0.4)",
               }}
             >
-              <span>View All</span>
+              <span>Explore All Case Studies</span>
               <ArrowUpRight size={18} />
             </Link>
           </div>
@@ -166,29 +220,30 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                 left: "-18px",
                 top: "50%",
                 transform: "translateY(-50%)",
-                width: "46px",
-                height: "46px",
+                width: "48px",
+                height: "48px",
                 borderRadius: "50%",
-                background: "rgba(255, 255, 255, 0.92)",
-                border: "1px solid rgba(0, 0, 0, 0.08)",
-                boxShadow: "0 6px 22px rgba(0, 0, 0, 0.16)",
+                background: "rgba(10, 28, 56, 0.9)",
+                border: "1px solid rgba(24, 144, 215, 0.4)",
+                boxShadow: "0 8px 30px rgba(0, 0, 0, 0.5)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 cursor: "pointer",
                 zIndex: 30,
-                color: "#0F172A",
+                color: "#FFFFFF",
+                backdropFilter: "blur(12px)",
                 transition: "all 0.2s ease",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#FFFFFF";
-                e.currentTarget.style.transform = "translateY(-50%) scale(1.08)";
-                e.currentTarget.style.boxShadow = "0 8px 26px rgba(0, 0, 0, 0.22)";
+                e.currentTarget.style.background = "var(--brand-blue-primary)";
+                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+                e.currentTarget.style.borderColor = "#38BDF8";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(255, 255, 255, 0.92)";
+                e.currentTarget.style.background = "rgba(10, 28, 56, 0.9)";
                 e.currentTarget.style.transform = "translateY(-50%) scale(1)";
-                e.currentTarget.style.boxShadow = "0 6px 22px rgba(0, 0, 0, 0.16)";
+                e.currentTarget.style.borderColor = "rgba(24, 144, 215, 0.4)";
               }}
             >
               <ChevronLeft size={22} />
@@ -202,27 +257,30 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                 right: "-18px",
                 top: "50%",
                 transform: "translateY(-50%)",
-                width: "46px",
-                height: "46px",
+                width: "48px",
+                height: "48px",
                 borderRadius: "50%",
-                background: "#FFFFFF",
-                border: "1px solid rgba(0, 0, 0, 0.08)",
-                boxShadow: "0 8px 24px rgba(0, 0, 0, 0.18)",
+                background: "rgba(10, 28, 56, 0.9)",
+                border: "1px solid rgba(24, 144, 215, 0.4)",
+                boxShadow: "0 8px 30px rgba(0, 0, 0, 0.5)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 cursor: "pointer",
                 zIndex: 30,
-                color: "#0F172A",
+                color: "#FFFFFF",
+                backdropFilter: "blur(12px)",
                 transition: "all 0.2s ease",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-50%) scale(1.08)";
-                e.currentTarget.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.25)";
+                e.currentTarget.style.background = "var(--brand-blue-primary)";
+                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+                e.currentTarget.style.borderColor = "#38BDF8";
               }}
               onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(10, 28, 56, 0.9)";
                 e.currentTarget.style.transform = "translateY(-50%) scale(1)";
-                e.currentTarget.style.boxShadow = "0 8px 24px rgba(0, 0, 0, 0.18)";
+                e.currentTarget.style.borderColor = "rgba(24, 144, 215, 0.4)";
               }}
             >
               <ChevronRight size={22} />
@@ -234,7 +292,7 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
               onScroll={handleScrollListener}
               style={{
                 display: "flex",
-                gap: "1.25rem",
+                gap: "1.5rem",
                 overflowX: "auto",
                 scrollSnapType: "x mandatory",
                 scrollbarWidth: "none",
@@ -242,13 +300,13 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                 padding: "0.75rem 0.5rem 1.25rem",
               }}
             >
-              {orderedStudies.map((study, idx) => (
+              {orderedStudies.map((study) => (
                 <Link
                   key={study.id}
                   href={`/case-studies/${study.slug}`}
                   style={{
                     textDecoration: "none",
-                    flex: "0 0 clamp(260px, 25vw, 305px)",
+                    flex: "0 0 clamp(280px, 28vw, 325px)",
                     scrollSnapAlign: "start",
                     display: "block",
                   }}
@@ -256,23 +314,26 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                   <div
                     style={{
                       position: "relative",
-                      height: "450px",
-                      borderRadius: "18px",
+                      height: "460px",
+                      borderRadius: "20px",
                       overflow: "hidden",
-                      boxShadow: "0 12px 35px rgba(0, 0, 0, 0.14)",
-                      border: "1px solid rgba(0, 0, 0, 0.06)",
-                      transition: "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+                      boxShadow: "0 15px 40px rgba(0, 0, 0, 0.4)",
+                      border: "1px solid rgba(255, 255, 255, 0.12)",
+                      transition: "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease",
                       cursor: "pointer",
+                      background: "#051124",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = "translateY(-8px)";
-                      e.currentTarget.style.boxShadow = "0 22px 50px rgba(0, 0, 0, 0.22)";
+                      e.currentTarget.style.boxShadow = "0 25px 60px rgba(24, 144, 215, 0.35)";
+                      e.currentTarget.style.borderColor = "rgba(56, 189, 248, 0.6)";
                       const img = e.currentTarget.querySelector("img");
-                      if (img) img.style.transform = "scale(1.06)";
+                      if (img) img.style.transform = "scale(1.08)";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = "translateY(0)";
-                      e.currentTarget.style.boxShadow = "0 12px 35px rgba(0, 0, 0, 0.14)";
+                      e.currentTarget.style.boxShadow = "0 15px 40px rgba(0, 0, 0, 0.4)";
+                      e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.12)";
                       const img = e.currentTarget.querySelector("img");
                       if (img) img.style.transform = "scale(1)";
                     }}
@@ -288,7 +349,7 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                         width: "100%",
                         height: "100%",
                         objectFit: "cover",
-                        transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+                        transition: "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
                       }}
                     />
 
@@ -296,16 +357,13 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                     <div
                       style={{
                         position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
+                        inset: 0,
                         background:
-                          "linear-gradient(180deg, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.2) 42%, rgba(15, 23, 42, 0.75) 100%)",
+                          "linear-gradient(180deg, rgba(3, 8, 19, 0.82) 0%, rgba(3, 8, 19, 0.25) 45%, rgba(3, 8, 19, 0.92) 100%)",
                       }}
                     />
 
-                    {/* Card Content Top: Prominent Title */}
+                    {/* Card Content Top: Industry Badge & Prominent Title */}
                     <div
                       style={{
                         position: "relative",
@@ -313,22 +371,41 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                         padding: "1.75rem 1.4rem",
                       }}
                     >
+                      <span
+                        style={{
+                          display: "inline-block",
+                          fontSize: "0.71875rem",
+                          fontWeight: 700,
+                          color: "#38BDF8",
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                          marginBottom: "0.6rem",
+                          background: "rgba(24, 144, 215, 0.2)",
+                          border: "1px solid rgba(56, 189, 248, 0.3)",
+                          padding: "0.2rem 0.6rem",
+                          borderRadius: "6px",
+                          backdropFilter: "blur(6px)",
+                        }}
+                      >
+                        {study.industry}
+                      </span>
+
                       <h3
                         style={{
                           fontSize: "1.375rem",
-                          fontWeight: 700,
+                          fontWeight: 800,
                           color: "#FFFFFF",
                           lineHeight: 1.25,
                           letterSpacing: "-0.015em",
                           margin: 0,
-                          textShadow: "0 2px 10px rgba(0, 0, 0, 0.6)",
+                          textShadow: "0 2px 10px rgba(0, 0, 0, 0.7)",
                         }}
                       >
                         {study.title}
                       </h3>
                     </div>
 
-                    {/* Card Content Bottom: Verified Key Metric & Arrow */}
+                    {/* Card Content Bottom: Verified Key Metric & Circular Action Pill */}
                     <div
                       style={{
                         position: "absolute",
@@ -336,34 +413,36 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                         left: 0,
                         right: 0,
                         zIndex: 10,
-                        padding: "1.25rem 1.4rem",
+                        padding: "1.5rem 1.4rem",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        background: "linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, transparent 100%)",
+                        background: "linear-gradient(to top, rgba(3, 8, 19, 0.98) 0%, rgba(3, 8, 19, 0.75) 60%, transparent 100%)",
                       }}
                     >
                       <div>
-                        <span
-                          style={{
-                            fontSize: "0.75rem",
-                            fontWeight: 700,
-                            color: "#38BDF8",
-                            letterSpacing: "0.04em",
-                            textTransform: "uppercase",
-                            display: "block",
-                          }}
-                        >
-                          {study.industry}
-                        </span>
                         {study.metrics && study.metrics[0] && (
-                          <div style={{ display: "flex", alignItems: "baseline", gap: "0.35rem", marginTop: "2px" }}>
-                            <strong style={{ fontSize: "1.1875rem", fontWeight: 800, color: "#FFFFFF" }}>
+                          <div>
+                            <div
+                              style={{
+                                fontSize: "1.5rem",
+                                fontWeight: 800,
+                                color: "#FFFFFF",
+                                textShadow: "0 0 12px rgba(56, 189, 248, 0.5)",
+                              }}
+                            >
                               {study.metrics[0].metric}
-                            </strong>
-                            <span style={{ fontSize: "0.75rem", color: "#CBD5E1" }}>
+                            </div>
+                            <div
+                              style={{
+                                fontSize: "0.78125rem",
+                                color: "#94A3B8",
+                                marginTop: "2px",
+                                fontWeight: 500,
+                              }}
+                            >
                               {study.metrics[0].label}
-                            </span>
+                            </div>
                           </div>
                         )}
                       </div>
@@ -371,20 +450,20 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                       {/* Circular Action Pill */}
                       <div
                         style={{
-                          width: "36px",
-                          height: "36px",
+                          width: "42px",
+                          height: "42px",
                           borderRadius: "50%",
-                          background: "rgba(255, 255, 255, 0.2)",
+                          background: "rgba(24, 144, 215, 0.25)",
                           backdropFilter: "blur(8px)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                           color: "#FFFFFF",
-                          border: "1px solid rgba(255, 255, 255, 0.4)",
-                          transition: "background 0.2s ease, transform 0.2s ease",
+                          border: "1px solid rgba(56, 189, 248, 0.5)",
+                          boxShadow: "0 4px 15px rgba(0, 0, 0, 0.3)",
                         }}
                       >
-                        <ArrowUpRight size={17} />
+                        <ArrowUpRight size={18} />
                       </div>
                     </div>
                   </div>
@@ -408,7 +487,7 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                   width: activeSlide === 0 ? "34px" : "14px",
                   height: "4px",
                   borderRadius: "2px",
-                  background: activeSlide === 0 ? "#0F172A" : "#CBD5E1",
+                  background: activeSlide === 0 ? "var(--brand-orange-primary)" : "rgba(255, 255, 255, 0.2)",
                   transition: "all 0.3s ease",
                 }}
               />
@@ -417,7 +496,7 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                   width: activeSlide === 1 ? "34px" : "14px",
                   height: "4px",
                   borderRadius: "2px",
-                  background: activeSlide === 1 ? "#0F172A" : "#CBD5E1",
+                  background: activeSlide === 1 ? "var(--brand-orange-primary)" : "rgba(255, 255, 255, 0.2)",
                   transition: "all 0.3s ease",
                 }}
               />
@@ -426,7 +505,7 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
                   width: activeSlide >= 2 ? "34px" : "14px",
                   height: "4px",
                   borderRadius: "2px",
-                  background: activeSlide >= 2 ? "#0F172A" : "#CBD5E1",
+                  background: activeSlide >= 2 ? "var(--brand-orange-primary)" : "rgba(255, 255, 255, 0.2)",
                   transition: "all 0.3s ease",
                 }}
               />
