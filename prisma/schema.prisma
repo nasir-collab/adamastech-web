@@ -1,0 +1,171 @@
+// Prisma Schema for Adamas Tech Consulting Enterprise Platform
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  AUTHOR
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  ARCHIVED
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         Role      @default(EDITOR)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  auditLogs    AuditLog[]
+
+  @@map("users")
+}
+
+model Service {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  subtitle    String?
+  shortDesc   String
+  fullDesc    String
+  category    String   @default("Consulting")
+  iconName    String?
+  bannerUrl   String?
+  features    String   // JSON string of feature bullet points
+  order       Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([isPublished, order])
+  @@map("services")
+}
+
+model Product {
+  id             String   @id @default(uuid())
+  slug           String   @unique
+  name           String
+  tag            String?
+  shortDesc      String
+  fullDesc       String
+  targetAudience String?
+  keyBenefits    String   // JSON string of benefits
+  liveDemoUrl    String?
+  order          Int      @default(0)
+  isPublished    Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([slug])
+  @@map("products")
+}
+
+model CaseStudy {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  clientName  String
+  industry    String
+  challenge   String
+  solution    String
+  results     String
+  metrics     String?  // JSON string e.g. [{"metric": "30%", "label": "Cash Forecast"}]
+  imageUrl    String?
+  tags        String   // comma separated
+  isFeatured  Boolean  @default(false)
+  order       Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@map("case_studies")
+}
+
+model Industry {
+  id           String   @id @default(uuid())
+  slug         String   @unique
+  name         String
+  title        String
+  description  String
+  iconName     String?
+  imageUrl     String?
+  keySolutions String   // JSON string
+  order        Int      @default(0)
+  isPublished  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([slug])
+  @@map("industries")
+}
+
+model ContactLead {
+  id            String     @id @default(uuid())
+  name          String
+  email         String
+  phoneNumber   String?
+  country       String?
+  message       String
+  termsAccepted Boolean    @default(true)
+  status        LeadStatus @default(NEW)
+  ipAddress     String?
+  notes         String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("contact_leads")
+}
+
+model SiteSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  group     String   @default("general")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+model MediaAsset {
+  id        String   @id @default(uuid())
+  filename  String
+  fileUrl   String
+  mimeType  String
+  sizeBytes Int
+  altText   String?
+  createdAt DateTime @default(now())
+
+  @@map("media_assets")
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  action      String
+  entity      String
+  entityId    String?
+  details     String?
+  performedBy String?
+  user        User?    @relation(fields: [performedBy], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@map("audit_logs")
+}
