@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import {
   Briefcase,
@@ -8,25 +8,15 @@ import {
   Users,
   Globe2,
   CheckCircle2,
-  ShieldCheck,
   Sparkles,
   ArrowUpRight,
   Landmark,
   GraduationCap,
   Activity,
   Cpu,
-  Search,
-  PhoneCall,
-  ChevronDown,
-  Layers,
-  Award,
-  Server,
 } from "lucide-react";
-import { AdamasLogo } from "../common/AdamasLogo";
-import { RegionToggler } from "../common/RegionToggler";
 
 export function TrustProofStrip() {
-  const [activeTab, setActiveTab] = useState(0);
   const stats = [
     {
       value: "22+",
@@ -122,152 +112,63 @@ export function TrustProofStrip() {
 
   const marqueeTrack = [...clientLogos, ...clientLogos];
 
-  // Menu-Driven Enterprise Practice Tabs (Directly matching the Navbar menu: Services, Products, Industries, Success Stories, Consulting)
-  const menuTabs = [
+  // Photographic Sector Provenance Dossiers
+  const sectorHighlights = [
     {
-      id: "services",
-      menuLabel: "Services",
-      hasDropdown: true,
-      icon: Server,
-      tag: "TIER-1 CLOUD & SAP CONSULTING",
-      title: "Mission-Critical Core Modernization & Scaled Cloud Infrastructure",
-      statNumber: "+30%",
-      statLabel: "Treasury & Forecast Velocity",
-      desc: "End-to-end SAP S/4HANA transformations, AWS advanced cloud architecture, and real-time enterprise AI analytics delivering audited ROI across multinational banking and industrial operations.",
-      clientLogo: "/images/clients/client-1.webp",
-      clientName: "PwC & Tier-1 Global Banks",
-      accentColor: "#38BDF8",
+      sector: "Banking & Financial Services",
+      tag: "BFSI & FINTECH",
+      icon: Landmark,
+      color: "#38BDF8",
       image: "/images/industries/bfsi.jpg",
-      browserUrl: "adamastech.in/services/sap-aws-cloud",
-      features: [
-        "Certified SAP Gold & AWS Advanced Cloud Architects",
-        "Zero-Downtime Host-to-Host SWIFT Reconciliation Across 14 Nodes",
-        "AI-Augmented Risk & Predictive Enterprise Liquidity Engine",
-      ],
-      subItems: [
-        { name: "SAP Solutions", href: "/services/sap-solution-consulting" },
-        { name: "AWS Cloud", href: "/services/aws-solutions" },
-        { name: "AI & Data Analytics", href: "/services/ai-data-analytics" },
-        { name: "Oracle NetSuite", href: "/services/oracle-netsuite-solutions" },
-      ],
-      primaryCta: { label: "Explore Services Practice", href: "/services" },
-      secondaryCta: { label: "View SAP Architecture", href: "/services/sap-solution-consulting" },
+      clientLogo: "/images/clients/client-1.webp",
+      clientName: "PwC & Tier-1 Private Banks",
+      statNumber: "+30%",
+      statLabel: "Cash Forecast Velocity",
+      title: "Global Financial Services & MENA Leaders",
+      desc: "Integrated SAP Treasury, automated host-to-host banking, and multi-currency SWIFT reconciliation across 14 financial nodes.",
+      link: "/industries/bfsi",
     },
     {
-      id: "products",
-      menuLabel: "Products",
-      hasDropdown: true,
-      icon: Layers,
-      tag: "PROPRIETARY SAAS & EDTECH ECOSYSTEM",
-      title: "Arivoo UMS/LMS & TestGUARD AI Powering 180,000+ Active Learners",
+      sector: "Higher Education & Academics",
+      tag: "EDTECH CONSORTIUM",
+      icon: GraduationCap,
+      color: "#10B981",
+      image: "/images/about-rice-adamas-campus.jpg",
+      clientLogo: "/images/clients/client-15.webp",
+      clientName: "120-Acre Campus Hub",
       statNumber: "180k+",
       statLabel: "Active Students Enrolled",
-      desc: "Proprietary campus OS unifying student admissions, exam scheduling, remote AI proctoring, and fee reconciliation for premier university consortiums and global educational institutions.",
-      clientLogo: "/images/clients/client-15.webp",
-      clientName: "120-Acre Adamas Campus Hub",
-      accentColor: "#10B981",
-      image: "/images/about-rice-adamas-campus.jpg",
-      browserUrl: "adamastech.in/products/arivoo-ums-ecosystem",
-      features: [
-        "End-to-End University Management System (Arivoo UMS)",
-        "AI-Powered Real-Time Remote Exam Proctoring (TestGUARD)",
-        "Multi-Campus Microservices Cloud Architecture & Scaled CSAT",
-      ],
-      subItems: [
-        { name: "Arivoo UMS", href: "/products/arivoo-ums" },
-        { name: "Arivoo LMS", href: "/products/arivoo-lms" },
-        { name: "TestGUARD AI", href: "/products/testguard" },
-        { name: "School SMS", href: "/products/arivoo-sms" },
-      ],
-      primaryCta: { label: "Explore Product Suite", href: "/products" },
-      secondaryCta: { label: "Request Arivoo Demo", href: "/contact" },
+      title: "Consortium of 180k+ Active Students",
+      desc: "Deployed Arivoo UMS/LMS suite across multidisciplinary university campuses, automating admissions, proctoring, and grading.",
+      link: "/products/arivoo-ums",
     },
     {
-      id: "industries",
-      menuLabel: "Industries",
-      hasDropdown: true,
-      icon: Landmark,
-      tag: "DEFENSE, BFSI & HIGH-REGULATION SECTORS",
-      title: "Sovereign-Grade Engineering for Defense, Banking & NHS Healthcare",
-      statNumber: "< 0.8s",
-      statLabel: "Zero-Trust Biometric Latency",
-      desc: "High-assurance technology architectures complying with CMMI Level 3 and ISO 27001 standards, deployed for naval shipbuilders, national health authorities, and tier-1 financial regulators.",
+      sector: "Defense & Healthcare",
+      tag: "DEFENSE & NHS DIGITAL",
+      icon: Activity,
+      color: "var(--brand-orange-primary)",
+      image: "/images/industries/healthcare.jpg",
       clientLogo: "/images/clients/client-4.webp",
       clientName: "GRSE Naval & NHS Digital",
-      accentColor: "var(--brand-orange-primary)",
-      image: "/images/industries/healthcare.jpg",
-      browserUrl: "adamastech.in/industries/defense-bfsi-healthcare",
-      features: [
-        "ISO 27001 Zero-Trust Clinical Infrastructure & Data Governance",
-        "Naval Defense C4ISR & Marine Engineering Real-Time Data",
-        "Cross-Border Financial Regulatory Compliance & Audited Workflows",
-      ],
-      subItems: [
-        { name: "BFSI & FinTech", href: "/industries/bfsi" },
-        { name: "Healthcare & Life Sciences", href: "/industries/healthcare" },
-        { name: "Manufacturing & Logistics", href: "/industries/manufacturing" },
-        { name: "Public Sector & Defense", href: "/industries" },
-      ],
-      primaryCta: { label: "Explore Industry Blueprints", href: "/industries" },
-      secondaryCta: { label: "View Defense Credentials", href: "/case-studies" },
+      statNumber: "< 0.8s",
+      statLabel: "Zero-Trust Biometric Latency",
+      title: "Naval Shipbuilding & NHS Digital",
+      desc: "High-integrity clinical workflow transformations and naval defense engineering governed by strict ISO 27001 zero-trust protocols.",
+      link: "/industries/healthcare",
     },
     {
-      id: "success-stories",
-      menuLabel: "Success Stories",
-      hasDropdown: false,
-      icon: Award,
-      tag: "AUDITED PRODUCTION CASE STUDIES",
-      title: "Proven Scale Across 950+ Enterprise Deployments in 4 Continents",
-      statNumber: "99.99%",
-      statLabel: "Mission-Critical Production SLA",
-      desc: "From accelerating Careem's super-app logistics to automating Aldar's smart city asset management, our senior engineering squads consistently deliver on-time, zero-defect outcomes.",
-      clientLogo: "/images/clients/client-6.webp",
-      clientName: "Aldar, Careem & United Foods",
-      accentColor: "#C084FC",
+      sector: "Energy, Telecom & Supply Chain",
+      tag: "CRITICAL INFRASTRUCTURE",
+      icon: Cpu,
+      color: "#C084FC",
       image: "/images/industries/manufacturing.jpg",
-      browserUrl: "adamastech.in/case-studies/enterprise-benchmarks",
-      features: [
-        "Zero-Defect CMMI L3 Appraised Delivery & Transparent KPI Governance",
-        "Multinational FMCG & Smart City Real-Time IoT Sensor Integration",
-        "Audited Infrastructure Cost Reductions & 3.4x Faster Release Cycles",
-      ],
-      subItems: [
-        { name: "Aldar Smart City", href: "/case-studies" },
-        { name: "Careem Logistics", href: "/case-studies" },
-        { name: "PwC SAP Treasury", href: "/case-studies" },
-        { name: "United Foods FMCG", href: "/case-studies" },
-      ],
-      primaryCta: { label: "View Audited Case Studies", href: "/case-studies" },
-      secondaryCta: { label: "Download Executive Dossier", href: "/contact" },
-    },
-    {
-      id: "consulting",
-      menuLabel: "Consulting",
-      hasDropdown: false,
-      icon: Briefcase,
-      tag: "STRATEGIC GOVERNANCE & ARCHITECTURE",
-      title: "Senior-Led Architecture Governance Backed by RICE Adamas Heritage",
-      statNumber: "22+",
-      statLabel: "Years Enterprise Legacy",
-      desc: "22+ years of institutional stability backed by RICE Adamas Group. We deploy dedicated enterprise architecture squads from global delivery hubs in London, Dubai, New York, and Kolkata.",
-      clientLogo: "/images/clients/client-2.webp",
-      clientName: "500+ Solution Architects",
-      accentColor: "#38BDF8",
-      image: "/images/locations/dubai-burj-khalifa.jpg",
-      browserUrl: "adamastech.in/consulting/enterprise-architecture",
-      features: [
-        "C-Level Strategic Technology Roadmapping & Governance",
-        "Enterprise Modernization & Cloud Readiness Assessment",
-        "Follow-the-Sun Governance Across 4 Continents & Timezones",
-      ],
-      subItems: [
-        { name: "Cloud Migration Strategy", href: "/consulting" },
-        { name: "Security Architecture", href: "/consulting" },
-        { name: "Enterprise ERP Advisory", href: "/consulting" },
-        { name: "Global Delivery Hubs", href: "/about-us" },
-      ],
-      primaryCta: { label: "Schedule Advisory Session", href: "/consulting" },
-      secondaryCta: { label: "Explore Global Hubs", href: "/about-us" },
+      clientLogo: "/images/clients/client-6.webp",
+      clientName: "Aldar & United Foods",
+      statNumber: "99.99%",
+      statLabel: "Mission-Critical SLA",
+      title: "14 Global Logistics Nodes & Telecom",
+      desc: "Real-time edge IoT sensors and SAP Analytics Cloud integration delivering predictive maintenance and zero unplanned outages.",
+      link: "/industries/manufacturing",
     },
   ];
 
@@ -790,733 +691,264 @@ export function TrustProofStrip() {
             </div>
           </div>
 
-          {/* ULTRA-PREMIUM MENU-BASED INTERACTIVE BENCHMARK SHOWCASE */}
-          <div style={{ marginTop: "1rem" }}>
-            {/* Section Eyebrow & Intro */}
+          {/* 4 RE-IMAGINED PHOTOGRAPHIC SECTOR DEPLOYMENT DOSSIER CARDS */}
+          <div>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 flexWrap: "wrap",
-                gap: "1rem",
-                marginBottom: "1.75rem",
-                paddingBottom: "1rem",
+                gap: "0.75rem",
+                marginBottom: "1.5rem",
+                paddingBottom: "0.85rem",
                 borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
               }}
             >
               <div>
-                <div
-                  style={{
-                    fontSize: "0.78125rem",
-                    fontWeight: 800,
-                    color: "var(--brand-orange-primary)",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.45rem",
-                    marginBottom: "0.35rem",
-                  }}
-                >
-                  <Sparkles size={14} color="var(--brand-orange-primary)" />
-                  <span>INTERACTIVE ENTERPRISE PORTFOLIO</span>
-                </div>
-                <h4
-                  style={{
-                    fontSize: "clamp(1.25rem, 2vw, 1.65rem)",
-                    fontWeight: 800,
-                    color: "#FFFFFF",
-                    letterSpacing: "-0.015em",
-                    margin: 0,
-                  }}
-                >
-                  Practice Benchmarks &amp; Provenance Stage
-                </h4>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.6rem",
-                  fontSize: "0.8125rem",
-                  color: "#94A3B8",
-                  fontWeight: 600,
-                }}
-              >
                 <span
                   style={{
-                    width: "8px",
-                    height: "8px",
-                    borderRadius: "50%",
-                    background: "#10B981",
-                    boxShadow: "0 0 10px #10B981",
+                    fontSize: "0.8125rem",
+                    fontWeight: 800,
+                    color: "#FFFFFF",
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
                   }}
-                />
-                <span>Live Audited Telemetry · Select Practice to Explore</span>
+                >
+                  Key Sector Deployment Benchmarks
+                </span>
+                <span style={{ color: "#64748B", margin: "0 0.5rem" }}>·</span>
+                <span style={{ fontSize: "0.78125rem", color: "#94A3B8" }}>
+                  Audited Production Case Studies Across Global Operations
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  fontSize: "0.75rem",
+                  color: "var(--brand-orange-primary)",
+                  fontWeight: 700,
+                }}
+              >
+                <CheckCircle2 size={13} color="var(--brand-orange-primary)" />
+                <span>Audited Enterprise Outcomes</span>
               </div>
             </div>
 
-            {/* FLOATING PILL MENU BAR - DIRECTLY MIRRORS THE NAVBAR DESIGN & UI/UX */}
             <div
-              className="benchmark-menu-bar"
               style={{
-                background: "rgba(6, 18, 38, 0.88)",
-                backdropFilter: "blur(20px)",
-                WebkitBackdropFilter: "blur(20px)",
-                border: "1px solid rgba(255, 255, 255, 0.12)",
-                borderRadius: "9999px",
-                padding: "0.55rem 0.85rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: "1rem",
-                boxShadow: "0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
-                marginBottom: "2rem",
-                position: "relative",
-                zIndex: 10,
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(270px, 1fr))",
+                gap: "1.5rem",
+                marginBottom: "2.5rem",
               }}
             >
-              {/* Left Brand Identity */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.75rem",
-                  paddingLeft: "0.5rem",
-                  flexShrink: 0,
-                }}
-              >
-                <AdamasLogo variant="colored" customHeight={32} withLink={false} />
-              </div>
-
-              {/* Center Menu Navigation Items (Services, Products, Industries, Success Stories, Consulting) */}
-              <nav
-                className="benchmark-nav-links"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.35rem",
-                  overflowX: "auto",
-                  scrollbarWidth: "none",
-                  padding: "0.2rem 0",
-                }}
-              >
-                {menuTabs.map((tab, idx) => {
-                  const isActive = activeTab === idx;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(idx)}
-                      type="button"
-                      className={`benchmark-nav-item ${isActive ? "active" : ""}`}
+              {sectorHighlights.map((sh, idx) => (
+                <Link
+                  key={idx}
+                  href={sh.link}
+                  style={{ textDecoration: "none", display: "block" }}
+                >
+                  <div
+                    className="sector-photographic-card"
+                    style={{
+                      background: "rgba(7, 20, 42, 0.9)",
+                      border: "1px solid rgba(255, 255, 255, 0.12)",
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      height: "100%",
+                      transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+                      boxShadow: "0 14px 35px rgba(0, 0, 0, 0.4)",
+                      position: "relative",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {/* Top Photographic Visual Header */}
+                    <div
                       style={{
-                        background: isActive
-                          ? "linear-gradient(135deg, rgba(24, 144, 215, 0.25) 0%, rgba(10, 35, 70, 0.45) 100%)"
-                          : "transparent",
-                        border: isActive
-                          ? "1px solid rgba(56, 189, 248, 0.5)"
-                          : "1px solid transparent",
-                        borderRadius: "9999px",
-                        padding: "0.45rem 1rem",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.4rem",
-                        color: isActive ? "#FFFFFF" : "#CBD5E1",
-                        fontSize: "0.875rem",
-                        fontWeight: isActive ? 700 : 500,
-                        cursor: "pointer",
-                        transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
-                        whiteSpace: "nowrap",
-                        boxShadow: isActive ? "0 4px 14px rgba(24, 144, 215, 0.25)" : "none",
+                        position: "relative",
+                        height: "145px",
+                        overflow: "hidden",
+                        background: "#030B17",
                       }}
                     >
-                      <span
+                      <img
+                        src={sh.image}
+                        alt={`${sh.title} - AdamasTech Sector Showcase`}
                         style={{
-                          width: "6px",
-                          height: "6px",
-                          borderRadius: "50%",
-                          background: isActive ? "var(--brand-orange-primary)" : "transparent",
-                          boxShadow: isActive ? "0 0 8px var(--brand-orange-primary)" : "none",
-                          transition: "all 0.2s ease",
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          transition: "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
                         }}
                       />
-                      <span>{tab.menuLabel}</span>
-                      {tab.hasDropdown && (
-                        <ChevronDown
-                          size={13}
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          background: `linear-gradient(180deg, rgba(3, 8, 19, 0.35) 0%, rgba(3, 8, 19, 0.88) 100%)`,
+                        }}
+                      />
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "0.85rem",
+                          left: "0.85rem",
+                          padding: "0.3rem 0.75rem",
+                          borderRadius: "9999px",
+                          background: "rgba(3, 8, 19, 0.8)",
+                          border: `1px solid ${sh.color}60`,
+                          color: sh.color,
+                          fontSize: "0.6875rem",
+                          fontWeight: 800,
+                          letterSpacing: "0.06em",
+                          textTransform: "uppercase",
+                          backdropFilter: "blur(10px)",
+                          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
+                        }}
+                      >
+                        {sh.tag}
+                      </div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "0.85rem",
+                          right: "0.85rem",
+                          height: "32px",
+                          padding: "0.2rem 0.65rem",
+                          borderRadius: "8px",
+                          background: "rgba(255, 255, 255, 0.94)",
+                          border: "1px solid rgba(255, 255, 255, 0.9)",
+                          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.35)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <img
+                          src={sh.clientLogo}
+                          alt={sh.clientName}
                           style={{
-                            color: isActive ? "#38BDF8" : "#94A3B8",
-                            transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
-                            transition: "transform 0.2s ease",
+                            maxHeight: "22px",
+                            maxWidth: "70px",
+                            objectFit: "contain",
+                            display: "block",
                           }}
                         />
-                      )}
-                    </button>
-                  );
-                })}
-              </nav>
-
-              {/* Right Menu Controls Suite (Search, Region Toggler, Talk to Expert CTA) */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.65rem",
-                  flexShrink: 0,
-                }}
-              >
-                {/* Search Quick Button */}
-                <Link
-                  href="/services"
-                  className="btn-glass"
-                  title="Search Services & Solutions"
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#FFFFFF",
-                    background: "rgba(255, 255, 255, 0.06)",
-                    border: "1px solid rgba(255, 255, 255, 0.15)",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  <Search size={15} />
-                </Link>
-
-                {/* Region Toggler Pill (Matches Screenshot 100%) */}
-                <div className="benchmark-region-wrapper">
-                  <RegionToggler variant="header" />
-                </div>
-
-                {/* Solar Orange Call to Action Pill */}
-                <Link
-                  href="/contact"
-                  className="benchmark-cta-btn"
-                  style={{
-                    fontSize: "0.84375rem",
-                    fontWeight: 700,
-                    padding: "0.5rem 1.25rem",
-                    borderRadius: "9999px",
-                    background: "linear-gradient(135deg, #F36F21 0%, #FF8A3D 100%)",
-                    color: "#FFFFFF",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.45rem",
-                    textDecoration: "none",
-                    boxShadow: "0 4px 18px rgba(243, 111, 33, 0.4)",
-                    border: "none",
-                    whiteSpace: "nowrap",
-                    transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
-                  }}
-                >
-                  <PhoneCall size={14} />
-                  <span>Talk to an Expert</span>
-                  <ArrowUpRight size={13} />
-                </Link>
-              </div>
-            </div>
-
-            {/* INTERACTIVE BENCHMARK SHOWCASE STAGE */}
-            {(() => {
-              const current = menuTabs[activeTab];
-              return (
-                <div
-                  className="benchmark-stage-grid"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1.1fr 1fr",
-                    gap: "2.5rem",
-                    alignItems: "center",
-                    background: "rgba(5, 16, 35, 0.75)",
-                    border: "1px solid rgba(24, 144, 215, 0.25)",
-                    borderRadius: "24px",
-                    padding: "clamp(1.75rem, 3vw, 2.75rem)",
-                    backdropFilter: "blur(14px)",
-                    boxShadow: "0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08)",
-                    marginBottom: "2.5rem",
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  {/* Subtle Background Radial Accent */}
-                  <div
-                    aria-hidden="true"
-                    style={{
-                      position: "absolute",
-                      top: "-60px",
-                      left: "-60px",
-                      width: "300px",
-                      height: "300px",
-                      borderRadius: "50%",
-                      background: `radial-gradient(circle, ${current.accentColor}25 0%, transparent 70%)`,
-                      filter: "blur(40px)",
-                      pointerEvents: "none",
-                    }}
-                  />
-
-                  {/* Left Column: Narrative, Metric & Actions */}
-                  <div style={{ position: "relative", zIndex: 2 }}>
-                    {/* Eyebrow Pill */}
-                    <div
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.5rem",
-                        padding: "0.35rem 0.95rem",
-                        borderRadius: "9999px",
-                        background: "rgba(3, 10, 24, 0.7)",
-                        border: `1px solid ${current.accentColor}60`,
-                        color: current.accentColor,
-                        fontSize: "0.71875rem",
-                        fontWeight: 800,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        marginBottom: "1rem",
-                      }}
-                    >
-                      <span
+                      </div>
+                      <div
                         style={{
-                          width: "7px",
-                          height: "7px",
-                          borderRadius: "50%",
-                          background: current.accentColor,
-                          boxShadow: `0 0 8px ${current.accentColor}`,
+                          position: "absolute",
+                          bottom: "0.65rem",
+                          left: "1rem",
+                          right: "1rem",
+                          display: "flex",
+                          alignItems: "baseline",
+                          gap: "0.5rem",
                         }}
-                      />
-                      <span>{current.tag}</span>
-                    </div>
-
-                    {/* Headline */}
-                    <h3
-                      style={{
-                        fontSize: "clamp(1.5rem, 2.5vw, 2.1rem)",
-                        fontWeight: 800,
-                        color: "#FFFFFF",
-                        letterSpacing: "-0.02em",
-                        lineHeight: 1.25,
-                        marginBottom: "0.95rem",
-                      }}
-                    >
-                      {current.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p
-                      style={{
-                        color: "#94A3B8",
-                        fontSize: "0.96875rem",
-                        lineHeight: 1.65,
-                        marginBottom: "1.75rem",
-                      }}
-                    >
-                      {current.desc}
-                    </p>
-
-                    {/* Big Audited Metric Display & Client Logo Plaque */}
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "1.75rem",
-                        background: "rgba(255, 255, 255, 0.04)",
-                        border: "1px solid rgba(255, 255, 255, 0.08)",
-                        borderRadius: "16px",
-                        padding: "1rem 1.4rem",
-                        marginBottom: "1.75rem",
-                        flexWrap: "wrap",
-                      }}
-                    >
-                      <div>
-                        <div
+                      >
+                        <span
                           style={{
-                            fontSize: "2.75rem",
+                            fontSize: "1.75rem",
                             fontWeight: 900,
                             color: "#FFFFFF",
                             lineHeight: 1,
                             letterSpacing: "-0.03em",
-                            textShadow: `0 0 20px ${current.accentColor}70`,
+                            textShadow: `0 0 16px ${sh.color}`,
                           }}
                         >
-                          {current.statNumber}
-                        </div>
-                        <div
+                          {sh.statNumber}
+                        </span>
+                        <span
                           style={{
-                            fontSize: "0.8125rem",
+                            fontSize: "0.75rem",
                             fontWeight: 700,
-                            color: current.accentColor,
-                            marginTop: "0.25rem",
+                            color: sh.color,
+                            letterSpacing: "0.02em",
                           }}
                         >
-                          {current.statLabel}
-                        </div>
-                      </div>
-
-                      <div
-                        style={{
-                          width: "1px",
-                          height: "44px",
-                          background: "rgba(255, 255, 255, 0.12)",
-                          display: "block",
-                        }}
-                      />
-
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
-                        <div
-                          style={{
-                            height: "42px",
-                            padding: "0.3rem 0.85rem",
-                            borderRadius: "10px",
-                            background: "rgba(255, 255, 255, 0.95)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            boxShadow: "0 4px 14px rgba(0, 0, 0, 0.25)",
-                          }}
-                        >
-                          <img
-                            src={current.clientLogo}
-                            alt={current.clientName}
-                            style={{
-                              maxHeight: "26px",
-                              maxWidth: "85px",
-                              objectFit: "contain",
-                              display: "block",
-                            }}
-                          />
-                        </div>
-                        <div>
-                          <div style={{ fontSize: "0.75rem", color: "#64748B", textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 700 }}>
-                            Validated By
-                          </div>
-                          <div style={{ fontSize: "0.875rem", color: "#F1F5F9", fontWeight: 700 }}>
-                            {current.clientName}
-                          </div>
-                        </div>
+                          {sh.statLabel}
+                        </span>
                       </div>
                     </div>
 
-                    {/* Feature Checkpoints */}
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2rem" }}>
-                      {current.features.map((feat, fIdx) => (
-                        <div key={fIdx} style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.875rem", color: "#CBD5E1" }}>
-                          <CheckCircle2 size={16} color={current.accentColor} style={{ flexShrink: 0 }} />
-                          <span>{feat}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Dual Action Buttons */}
-                    <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
-                      <Link
-                        href={current.primaryCta.href}
-                        className="btn btn-primary"
-                        style={{
-                          padding: "0.75rem 1.75rem",
-                          borderRadius: "9999px",
-                          fontSize: "0.9375rem",
-                          fontWeight: 700,
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: "0.5rem",
-                          background: "linear-gradient(135deg, #F36F21 0%, #FF8A3D 100%)",
-                          boxShadow: "0 6px 20px rgba(243, 111, 33, 0.4)",
-                        }}
-                      >
-                        <span>{current.primaryCta.label}</span>
-                        <ArrowUpRight size={15} />
-                      </Link>
-
-                      <Link
-                        href={current.secondaryCta.href}
-                        style={{
-                          padding: "0.75rem 1.6rem",
-                          borderRadius: "9999px",
-                          fontSize: "0.875rem",
-                          fontWeight: 700,
-                          color: "#FFFFFF",
-                          background: "rgba(255, 255, 255, 0.08)",
-                          border: "1px solid rgba(255, 255, 255, 0.18)",
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: "0.45rem",
-                          textDecoration: "none",
-                          transition: "all 0.2s ease",
-                        }}
-                      >
-                        <span>{current.secondaryCta.label}</span>
-                        <ChevronDown size={14} color="#94A3B8" />
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Right Column: Cinematic High-Def Visual Browser Terminal */}
-                  <div style={{ position: "relative" }}>
+                    {/* Card Narrative Content */}
                     <div
-                      className="browser-terminal-frame"
                       style={{
-                        background: "rgba(3, 9, 20, 0.95)",
-                        border: "1px solid rgba(255, 255, 255, 0.15)",
-                        borderRadius: "20px",
-                        overflow: "hidden",
-                        boxShadow: "0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(24, 144, 215, 0.2)",
-                        transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                        padding: "1.25rem 1.25rem 1.35rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        flex: 1,
                       }}
                     >
-                      {/* Browser Window Header Chrome */}
+                      <div>
+                        <h4
+                          style={{
+                            fontSize: "1.0625rem",
+                            fontWeight: 800,
+                            color: "#FFFFFF",
+                            letterSpacing: "-0.015em",
+                            lineHeight: 1.3,
+                            marginBottom: "0.55rem",
+                          }}
+                        >
+                          {sh.title}
+                        </h4>
+                        <p
+                          style={{
+                            fontSize: "0.8125rem",
+                            color: "#94A3B8",
+                            lineHeight: 1.55,
+                            margin: 0,
+                            marginBottom: "1.15rem",
+                          }}
+                        >
+                          {sh.desc}
+                        </p>
+                      </div>
+
                       <div
                         style={{
-                          height: "40px",
-                          background: "rgba(6, 16, 32, 0.95)",
-                          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+                          paddingTop: "0.75rem",
+                          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "space-between",
-                          padding: "0 1rem",
+                          fontSize: "0.8125rem",
+                          fontWeight: 700,
+                          color: sh.color,
                         }}
                       >
-                        {/* Window Dots */}
-                        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                          <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#EF4444", display: "inline-block" }} />
-                          <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#F59E0B", display: "inline-block" }} />
-                          <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#10B981", display: "inline-block" }} />
-                        </div>
-
-                        {/* URL Pill */}
+                        <span>View Sector Blueprint</span>
                         <div
                           style={{
+                            width: "28px",
+                            height: "28px",
+                            borderRadius: "50%",
                             background: "rgba(255, 255, 255, 0.06)",
-                            border: "1px solid rgba(255, 255, 255, 0.1)",
-                            borderRadius: "9999px",
-                            padding: "0.2rem 1rem",
-                            fontSize: "0.6875rem",
-                            color: "#94A3B8",
+                            border: `1px solid ${sh.color}40`,
                             display: "flex",
                             alignItems: "center",
-                            gap: "0.45rem",
-                            maxWidth: "280px",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
+                            justifyContent: "center",
+                            transition: "transform 0.2s ease, background 0.2s ease",
                           }}
                         >
-                          <span style={{ color: "#10B981" }}>🔒</span>
-                          <span>https://{current.browserUrl}</span>
-                        </div>
-
-                        {/* Status Tag */}
-                        <div style={{ fontSize: "0.6875rem", fontWeight: 700, color: "#38BDF8" }}>
-                          LIVE HUD
+                          <ArrowUpRight size={14} color={sh.color} />
                         </div>
                       </div>
-
-                      {/* Visual Photographic Stage */}
-                      <div
-                        style={{
-                          position: "relative",
-                          height: "360px",
-                          overflow: "hidden",
-                          background: "#020712",
-                        }}
-                      >
-                        <img
-                          src={current.image}
-                          alt={current.title}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                            display: "block",
-                            transition: "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
-                          }}
-                        />
-
-                        {/* Cinematic Vignette */}
-                        <div
-                          style={{
-                            position: "absolute",
-                            inset: 0,
-                            background: "linear-gradient(180deg, rgba(3, 8, 19, 0.2) 0%, rgba(3, 8, 19, 0.75) 100%)",
-                          }}
-                        />
-
-                        {/* Floating Top Telemetry Badge */}
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: "1rem",
-                            right: "1rem",
-                            padding: "0.4rem 0.85rem",
-                            borderRadius: "10px",
-                            background: "rgba(4, 12, 28, 0.85)",
-                            backdropFilter: "blur(12px)",
-                            border: "1px solid rgba(24, 144, 215, 0.4)",
-                            color: "#FFFFFF",
-                            fontSize: "0.75rem",
-                            fontWeight: 700,
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "0.45rem",
-                            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.5)",
-                          }}
-                        >
-                          <ShieldCheck size={14} color="#10B981" />
-                          <span>ISO 27001 &amp; CMMI L3</span>
-                        </div>
-
-                        {/* Floating Bottom Telemetry Badge */}
-                        <div
-                          style={{
-                            position: "absolute",
-                            bottom: "1rem",
-                            left: "1rem",
-                            right: "1rem",
-                            padding: "0.65rem 1rem",
-                            borderRadius: "12px",
-                            background: "rgba(4, 12, 28, 0.88)",
-                            backdropFilter: "blur(12px)",
-                            border: "1px solid rgba(255, 255, 255, 0.12)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            boxShadow: "0 10px 28px rgba(0, 0, 0, 0.5)",
-                          }}
-                        >
-                          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                            <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#10B981", boxShadow: "0 0 10px #10B981" }} />
-                            <span style={{ fontSize: "0.78125rem", color: "#F1F5F9", fontWeight: 700 }}>
-                              99.9% Audited Reliability SLA
-                            </span>
-                          </div>
-                          <span style={{ fontSize: "0.71875rem", color: "#94A3B8" }}>
-                            London · Dubai · NY · Kolkata
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Quick Sub-Navigation Links */}
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.5rem",
-                        marginTop: "1rem",
-                        flexWrap: "wrap",
-                      }}
-                    >
-                      <span style={{ fontSize: "0.75rem", color: "#64748B", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                        Quick Practices:
-                      </span>
-                      {current.subItems.map((sub, sIdx) => (
-                        <Link
-                          key={sIdx}
-                          href={sub.href}
-                          style={{
-                            fontSize: "0.78125rem",
-                            padding: "0.25rem 0.75rem",
-                            borderRadius: "9999px",
-                            background: "rgba(255, 255, 255, 0.05)",
-                            border: "1px solid rgba(255, 255, 255, 0.1)",
-                            color: "#CBD5E1",
-                            textDecoration: "none",
-                            transition: "all 0.2s ease",
-                          }}
-                        >
-                          {sub.name} →
-                        </Link>
-                      ))}
                     </div>
                   </div>
-                </div>
-              );
-            })()}
-
-            {/* Bottom 5-Practice Quick-Select Switcher Carousel */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                gap: "1rem",
-                marginBottom: "2.5rem",
-              }}
-            >
-              {menuTabs.map((tab, idx) => {
-                const isActive = activeTab === idx;
-                const Icon = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(idx)}
-                    type="button"
-                    style={{
-                      background: isActive
-                        ? "linear-gradient(135deg, rgba(10, 32, 68, 0.95) 0%, rgba(5, 18, 40, 0.95) 100%)"
-                        : "rgba(6, 18, 38, 0.6)",
-                      border: isActive
-                        ? "1px solid rgba(56, 189, 248, 0.6)"
-                        : "1px solid rgba(255, 255, 255, 0.08)",
-                      borderRadius: "16px",
-                      padding: "1rem 1.15rem",
-                      textAlign: "left",
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.85rem",
-                      transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-                      boxShadow: isActive
-                        ? "0 10px 25px rgba(24, 144, 215, 0.25)"
-                        : "0 4px 14px rgba(0, 0, 0, 0.25)",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "38px",
-                        height: "38px",
-                        borderRadius: "10px",
-                        background: isActive ? "rgba(24, 144, 215, 0.2)" : "rgba(255, 255, 255, 0.04)",
-                        border: `1px solid ${isActive ? tab.accentColor : "rgba(255, 255, 255, 0.1)"}`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: 0,
-                      }}
-                    >
-                      <Icon size={18} color={isActive ? tab.accentColor : "#94A3B8"} />
-                    </div>
-                    <div>
-                      <div
-                        style={{
-                          fontSize: "0.875rem",
-                          fontWeight: 700,
-                          color: isActive ? "#FFFFFF" : "#CBD5E1",
-                          lineHeight: 1.2,
-                        }}
-                      >
-                        {tab.menuLabel}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: "0.75rem",
-                          fontWeight: 600,
-                          color: isActive ? tab.accentColor : "#64748B",
-                          marginTop: "0.15rem",
-                        }}
-                      >
-                        {tab.statNumber} {tab.statLabel.split(" ")[0]}
-                      </div>
-                    </div>
-                  </button>
-                );
-              })}
+                </Link>
+              ))}
             </div>
           </div>
-
-          {/* Centralized Action Button to Case Studies */}
+            {/* Centralized Action Button to Case Studies */}
           <div style={{ textAlign: "center" }}>
             <Link
               href="/case-studies"
@@ -1573,38 +1005,13 @@ export function TrustProofStrip() {
           transform: scale(1.03);
           box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35), 0 0 20px rgba(56, 189, 248, 0.3) !important;
         }
-        .benchmark-nav-item:hover {
-          color: #FFFFFF !important;
-          background: rgba(255, 255, 255, 0.08) !important;
+                .sector-photographic-card:hover {
+          transform: translateY(-6px);
+          border-color: rgba(56, 189, 248, 0.55) !important;
+          box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(24, 144, 215, 0.25) !important;
         }
-        .benchmark-cta-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(243, 111, 33, 0.55) !important;
-          filter: brightness(1.08);
-        }
-        .browser-terminal-frame:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), 0 0 40px rgba(24, 144, 215, 0.3) !important;
-        }
-        .browser-terminal-frame:hover img {
-          transform: scale(1.04);
-        }
-        @media (max-width: 1024px) {
-          .benchmark-stage-grid {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
-          }
-          .benchmark-menu-bar {
-            border-radius: 20px !important;
-            flex-wrap: wrap !important;
-            padding: 0.85rem !important;
-          }
-          .benchmark-nav-links {
-            width: 100% !important;
-            order: 3 !important;
-            padding-top: 0.5rem !important;
-            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-          }
+        .sector-photographic-card:hover img {
+          transform: scale(1.05);
         }
       `}</style>
     </section>
