@@ -34,8 +34,10 @@ export function Navbar() {
   return (
     <header className={`site-header ${isScrolled ? "scrolled" : ""}`}>
       <div className="container header-inner">
-        {/* Brand Logo */}
-        <AdamasLogo variant="colored" size="md" />
+        {/* Brand Logo with Protected Breathing Space */}
+        <div className="header-logo-container" style={{ flexShrink: 0, marginRight: "clamp(0.75rem, 1.75vw, 2.25rem)" }}>
+          <AdamasLogo variant="colored" customHeight={42} />
+        </div>
 
         {/* Desktop Navigation */}
         <nav className="nav-links" aria-label="Main Navigation">
@@ -162,21 +164,26 @@ export function Navbar() {
           </div>
         </nav>
 
-        {/* Header Right Actions */}
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+        {/* Header Right Actions - Perfectly Aligned 38px Control Suite */}
+        <div className="header-actions" style={{ display: "flex", alignItems: "center", gap: "0.65rem", flexShrink: 0 }}>
           {/* Quick Search Button */}
           <button
             onClick={() => setSearchOpen(true)}
             className="btn-glass"
             style={{
-              padding: "0.5rem",
+              width: "38px",
+              height: "38px",
               borderRadius: "50%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               color: "#FFFFFF",
               cursor: "pointer",
+              background: "rgba(255, 255, 255, 0.06)",
               border: "1px solid rgba(255, 255, 255, 0.15)",
+              flexShrink: 0,
+              padding: 0,
+              transition: "all 0.2s ease",
             }}
             aria-label="Search AdamasTech Services & Solutions"
           >
@@ -186,14 +193,27 @@ export function Navbar() {
           {/* Region / Country Toggler (Matches Screenshot UI/UX) */}
           <RegionToggler variant="header" />
 
+          {/* Solar Orange Call to Action Pill */}
           <Link
             href="/contact"
             className="btn btn-primary"
-            style={{ fontSize: "0.875rem", padding: "0.6rem 1.35rem", borderRadius: "var(--radius-full)" }}
+            style={{
+              fontSize: "0.84375rem",
+              fontWeight: 700,
+              height: "38px",
+              padding: "0 1.25rem",
+              borderRadius: "9999px",
+              whiteSpace: "nowrap",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.45rem",
+              flexShrink: 0,
+              lineHeight: 1,
+            }}
           >
-            <PhoneCall size={15} />
+            <PhoneCall size={14} />
             <span>Talk to an Expert</span>
-            <ArrowUpRight size={14} />
+            <ArrowUpRight size={13} />
           </Link>
 
           {/* Mobile Menu Button */}
